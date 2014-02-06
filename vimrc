@@ -17,21 +17,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/tComment'
 Bundle 'vim-scripts/bufexplorer.zip'
-
-"
-" original repos on GitHub
-" Bundle 'tpope/vim-fugitive'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
-" Bundle 'L9'
-" Bundle 'FuzzyFinder'
-" non-GitHub repos
-" Bundle 'git://git.wincent.com/command-t.git'
-" Git repos on your local machine (i.e. when working on your own plugin)
-" Bundle 'file:///Users/gmarik/path/to/plugin'
-" ...
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on     " required!
 
@@ -113,6 +99,10 @@ set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arr
 
 " Remove menu bar
 set guioptions=rLte 
+
+" Put a line at 80 characters
+set colorcolumn=81
+match ErrorMsg '\%>80v.\+'
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
@@ -198,18 +188,16 @@ vnoremap <silent> <expr> p PasteOver()
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""
 
-" MRU
+""" MRU
 let MRU_Max_Entries = 500
 map <leader>m :MRU<CR>
 
-""""""""""""""""""""""""""""""
-" TComment
-""""""""""""""""""""""""""""""
-" vnoremap / :TComment<CR>
+""" TComment
 map g/ :TComment<CR>
 
-""""""""""""""""""""""""""""""
-" Bufexplorer
-""""""""""""""""""""""""""""""
+""" Bufexplorer
 " Do not show default help.
 let g:bufExplorerDefaultHelp=0
+
+""" NERDTree
+nnoremap <f2> :NERDTreeToggle<CR>
