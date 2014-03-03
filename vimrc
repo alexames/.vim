@@ -10,22 +10,25 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My bundles here:
 Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/tComment'
 Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'vim-scripts/bufkill.vim'
+Bundle 'vim-scripts/surround.vim'
+Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp.vim'
 
 filetype plugin indent on     " required!
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
 """""""""""""""""""""""""""""""""""""""""""""
-
-color blackboard
 
 " Sets the titlebar of the terminal to be the name of the file
 set title
@@ -75,7 +78,7 @@ set smartcase " Ignore the ignorecase option if search pattern contains uppcase 
 set number
 
 " Opens moves to the existing buffer instead of reopening it
-set switchbuf=useopen,usetab 
+set switchbuf=useopen,usetab
 
 " Decide folds using indentation
 set foldmethod=syntax
@@ -83,42 +86,39 @@ set foldenable
 set foldlevel=1000
 
 " turn on syntax highlighting
-syntax on 
+syntax on
 
 " Turns on autodetection of filetypes
 filetype on
 
 " Loads the plugins for specific filetypes
-filetype plugin on 
+filetype plugin on
 
 " sets GNU grep to be the program to run when searching
 set grepprg=grep\ -nH\ $* 
 
 " what the mouse pointer looks like in different modes
-set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow 
+set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow
 
 " Remove menu bar
-set guioptions=rLte 
+set guioptions=rLte
 
 " Put a line at 80 characters
 set colorcolumn=81
-match ErrorMsg '\%>80v.\+'
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """""""""""""""""""""""""""""""""""""""""""""
 
 " Fast editing of the .vimrc
-map <leader>v :tabe! $MYVIMRC<cr>
-map <leader>c :tabe! ~/.vim/bundle/snipMate/snippets/c.snippets<cr>
-map <leader>l :tabe! ~/.vim/bundle/snipMate/snippets/lua.snippets<cr>
-map <leader>p :tabe! ~/.vim/bundle/snipMate/snippets/cpp.snippets<cr>
+nnoremap <leader>v :tabe! $MYVIMRC<CR>
+nnoremap <leader>c :botright cwindow<CR>
 
 " Settings for dealing with buffers
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Switch between reltaive numbering and absolute numbering
 if exists("+relativenumber")
@@ -139,6 +139,16 @@ map <S-k> k
 
 imap jj <ESC>
 imap kk <ESC>
+
+nnoremap <silent> <f12> :!ctags -R *<CR>
+
+nnoremap <space> za
+
+" Quick save and loading of sessions
+nnoremap <F7> :mksession! ./.vim_session<cr>
+nnoremap <F8> :source ./.vim_session<cr>
+
+nnoremap <C-;> :!
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
@@ -168,7 +178,7 @@ endfunction
 
 nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
-autocmd BufWritePre *.lua,*.c,*.cpp,*.h :call Preserve("%s/\\s\\+$//e")
+autocmd BufWritePre *.js,*.html,*.css,*.lua,*.c,*.cpp,*.h :call Preserve("%s/\\s\\+$//e")
 
 cmap <C-V> <C-R>+
 
@@ -201,3 +211,14 @@ let g:bufExplorerDefaultHelp=0
 
 """ NERDTree
 nnoremap <f2> :NERDTreeToggle<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" Filetype specific
+"""""""""""""""""""""""""""""""""""""""""""""
+
+""" HTML
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype python setlocal ts=2 sts=2 sw=2
