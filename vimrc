@@ -211,8 +211,7 @@ vnoremap <silent> <expr> p PasteOver()
 
 """ MRU
 let MRU_Max_Entries = 500
-" nnoremap <leader>m :MRU<CR>
-nnoremap <C-n> :MRU<CR>
+nnoremap <leader>m :MRU<CR>
 
 """ TComment
 nnoremap g/ :TComment<CR>
