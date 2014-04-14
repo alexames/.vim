@@ -14,15 +14,16 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles here:
-Bundle 'vim-scripts/mru.vim'
-Bundle 'vim-scripts/tComment'
+Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/Parameter-Text-Objects'
+Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/bufkill.vim'
+Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/surround.vim'
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/Parameter-Text-Objects'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/tComment'
 
 filetype plugin indent on     " required!
 
@@ -120,6 +121,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+
+inoremap <left> <nop>
+inoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+
 " Switch between reltaive numbering and absolute numbering
 if exists("+relativenumber")
     nmap <leader>r :set relativenumber<CR>
@@ -200,14 +211,17 @@ vnoremap <silent> <expr> p PasteOver()
 
 """ MRU
 let MRU_Max_Entries = 500
-map <leader>m :MRU<CR>
+" nnoremap <leader>m :MRU<CR>
+nnoremap <C-n> :MRU<CR>
 
 """ TComment
-map g/ :TComment<CR>
+nnoremap g/ :TComment<CR>
+vnoremap g/ :TComment<CR>
 
 """ Bufexplorer
 " Do not show default help.
 let g:bufExplorerDefaultHelp=0
+nnoremap <C-b> :BufExplorer<cr>
 
 """ NERDTree
 nnoremap <f2> :NERDTreeToggle<CR>
