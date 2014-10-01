@@ -65,6 +65,7 @@ set scrolloff=2
 " Tab settings
 set tabstop=4 " Tabs are 4 spaces
 set shiftwidth=4 " Tab characters are 4 spaces
+set softtabstop=4 " Soft tabs are 4 spaces
 set expandtab " Tab key creates spaces instead of tabs
 set autoindent
 set smartindent " Intelligently guess the indentation level of the next line
@@ -96,7 +97,7 @@ filetype on
 filetype plugin on
 
 " sets GNU grep to be the program to run when searching
-set grepprg=grep\ -nH\ $* 
+set grepprg=grep\ -rinH\ $*
 
 " what the mouse pointer looks like in different modes
 set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow
@@ -113,7 +114,7 @@ set colorcolumn=81
 
 " Fast editing of the .vimrc
 nnoremap <leader>v :tabe! $MYVIMRC<CR>
-nnoremap <leader>c :botright cwindow<CR>
+nnoremap <leader>cw :botright cwindow<CR>
 
 " Settings for dealing with buffers
 nnoremap <C-h> <C-w>h
@@ -131,12 +132,6 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 
-" Switch between reltaive numbering and absolute numbering
-if exists("+relativenumber")
-    nmap <leader>r :set relativenumber<CR>
-endif
-nmap <leader>n :set number<CR>
-
 " Make yank not stupid
 map Y y$
 
@@ -148,9 +143,6 @@ imap <C-v> <esc>"+pa
 " I hit shift k a lot when I mean to just hit k, for some reason
 map <S-k> k
 
-imap jj <ESC>
-imap kk <ESC>
-
 nnoremap <silent> <f12> :!ctags -R *<CR>
 
 nnoremap <space> za
@@ -159,7 +151,10 @@ nnoremap <space> za
 nnoremap <F7> :mksession! ./.vim_session<cr>
 nnoremap <F8> :source ./.vim_session<cr>
 
-nnoremap <C-;> :!
+nnoremap ! :!
+nnoremap q: :q
+
+vnoremap <C-h> y:call Preserve("%s/<C-r>"//g")<left><left><left><left>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
@@ -189,7 +184,7 @@ endfunction
 
 nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
-autocmd BufWritePre *.js,*.html,*.css,*.lua,*.c,*.cpp,*.h :call Preserve("%s/\\s\\+$//e")
+autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
 
 cmap <C-V> <C-R>+
 
@@ -229,9 +224,4 @@ nnoremap <f2> :NERDTreeToggle<CR>
 " Filetype specific
 """""""""""""""""""""""""""""""""""""""""""""
 
-""" HTML
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
-autocmd Filetype css setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-autocmd Filetype python setlocal ts=2 sts=2 sw=2
+autocmd Filetype java setlocal colorcolumn=101
