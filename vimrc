@@ -15,13 +15,16 @@ Bundle 'gmarik/vundle'
 
 " My bundles here:
 Bundle 'kien/ctrlp.vim'
+Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/bufkill.vim'
+Bundle 'vim-scripts/clang-complete'
 Bundle 'vim-scripts/mru.vim'
+Bundle 'vim-scripts/snipmate'
 Bundle 'vim-scripts/surround.vim'
 Bundle 'vim-scripts/tComment'
 
@@ -83,7 +86,8 @@ set number
 set switchbuf=useopen,usetab
 
 " Decide folds using indentation
-set foldmethod=syntax
+" set foldmethod=syntax
+set foldmethod=indent
 set foldenable
 set foldlevel=1000
 
@@ -155,6 +159,16 @@ nnoremap ! :!
 nnoremap q: :q
 
 vnoremap <C-h> y:call Preserve("%s/<C-r>"//g")<left><left><left><left>
+vnoremap <C-f> y:grep <C-r>" %:p:h
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap Q gqap
+
+" Enable * and # in visual mode to make it easier to search for things.
+" vnoremap * yo<esc>pV:s-/-\\/-ge<cr>0y$u/\<<c-r>"<cr>\>
+" vnoremap # yo<esc>pV:s-/-\\/-ge<cr>0y$u?\<<c-r>"<cr>\>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
@@ -182,9 +196,10 @@ function! Preserve(command)
     call winrestview(w)
 endfunction
 
-nnoremap <silent> <leader>= :call Preserve("normal gg=G")<CR>
+nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
-autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+" autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+autocmd BufWritePre Filetype cpp :call Preserve("FormatCode")
 
 cmap <C-V> <C-R>+
 
@@ -199,6 +214,12 @@ function! PasteOver()
      return "p@=RestoreRegister()\<cr>"
 endfunction
 vnoremap <silent> <expr> p PasteOver()
+
+" Ignore the following files in ctrl-P
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
+  \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
+  \ }
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Plugins
