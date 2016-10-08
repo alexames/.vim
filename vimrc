@@ -1,4 +1,3 @@
-
 set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -14,10 +13,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles here:
-Bundle 'kien/ctrlp.vim'
+" Bundle 'kien/ctrlp.vim'
+Bundle 'godlygeek/tabular'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdtree'
+Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-repeat'
 Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/bufexplorer.zip'
@@ -112,6 +114,22 @@ set guioptions=rLte
 " Put a line at 80 characters
 set colorcolumn=81
 
+" Make the dividers look nicer
+set fillchars+=vert:│
+
+"""""""""""""""""""""""""""""""""""""""""""""
+" NeoVim Options
+"""""""""""""""""""""""""""""""""""""""""""""
+
+if has("nvim")
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-h> <C-\><C-n><C-w>h
+  tnoremap <C-j> <C-\><C-n><C-w>j
+  tnoremap <C-k> <C-\><C-n><C-w>k
+  tnoremap <C-l> <C-\><C-n><C-w>l
+  autocmd BufWinEnter,WinEnter term://* startinsert
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """""""""""""""""""""""""""""""""""""""""""""
@@ -143,6 +161,9 @@ map Y y$
 vmap <C-c> "+y
 vmap <C-x> "+d
 imap <C-v> <esc>"+pa
+
+" Tabularizing
+vmap <S-T> :Tab/\|<CR>
 
 " I hit shift k a lot when I mean to just hit k, for some reason
 map <S-k> k
@@ -176,6 +197,7 @@ nnoremap Q gqap
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost ~/.vimrc source $MYVIMRC
+autocmd! bufwritepost ~/.vim/init.vim source $MYVIMRC
 autocmd! bufwritepost ~/.vim/vimrc source $MYVIMRC
 autocmd! bufwritepost $VIM/vimfiles/vimrc source $MYVIMRC
 
@@ -240,6 +262,12 @@ nnoremap <C-b> :BufExplorer<cr>
 
 """ NERDTree
 nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f3> :NERDTreeFind<CR>
+let NERDTreeMinimalUI=1
+let NERDTreeWinSize=72
+
+""" vim-multiple-cursors
+let g:multi_cursor_exit_from_insert_mode = 0
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Filetype specific
