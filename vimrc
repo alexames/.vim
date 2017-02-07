@@ -22,6 +22,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/abolish.vim'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/clang-complete'
@@ -106,7 +107,8 @@ filetype plugin on
 set grepprg=grep\ -rinH\ $*
 
 " what the mouse pointer looks like in different modes
-set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow
+" set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow
+set mouse=""
 
 " Remove menu bar
 set guioptions=rLte
@@ -127,7 +129,7 @@ if has("nvim")
   tnoremap <C-j> <C-\><C-n><C-w>j
   tnoremap <C-k> <C-\><C-n><C-w>k
   tnoremap <C-l> <C-\><C-n><C-w>l
-  autocmd BufWinEnter,WinEnter term://* startinsert
+  " autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -162,9 +164,6 @@ vmap <C-c> "+y
 vmap <C-x> "+d
 imap <C-v> <esc>"+pa
 
-" Tabularizing
-vmap <S-T> :Tab/\|<CR>
-
 " I hit shift k a lot when I mean to just hit k, for some reason
 map <S-k> k
 
@@ -186,6 +185,11 @@ nnoremap j gj
 nnoremap k gk
 
 nnoremap Q gqap
+
+" Disable highlighting by hitting escape.
+nnoremap <silent> <esc> :noh<cr><esc>
+
+cmap <C-V> <C-R>+
 
 " Enable * and # in visual mode to make it easier to search for things.
 " vnoremap * yo<esc>pV:s-/-\\/-ge<cr>0y$u/\<<c-r>"<cr>\>
@@ -221,9 +225,7 @@ endfunction
 nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
 " autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
-autocmd BufWritePre Filetype cpp :call Preserve("FormatCode")
-
-cmap <C-V> <C-R>+
+" autocmd BufWritePre Filetype cpp :call Preserve("FormatCode")
 
 " replace selected text with text in paste register, without overwriting the
 " text in the yank register with the text replaced.
@@ -236,12 +238,6 @@ function! PasteOver()
      return "p@=RestoreRegister()\<cr>"
 endfunction
 vnoremap <silent> <expr> p PasteOver()
-
-" Ignore the following files in ctrl-P
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
-  \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
-  \ }
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -264,13 +260,29 @@ nnoremap <C-b> :BufExplorer<cr>
 nnoremap <f2> :NERDTreeToggle<CR>
 nnoremap <f3> :NERDTreeFind<CR>
 let NERDTreeMinimalUI=1
-let NERDTreeWinSize=72
+let NERDTreeWinSize=48
 
 """ vim-multiple-cursors
 let g:multi_cursor_exit_from_insert_mode = 0
+
+""" alternate
+let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
+let g:alternateExtensions_mm = "h"
+
+""" CtrlP
+" Ignore the following files in ctrl-P
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
+  \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
+  \ }
+
+""" Tabularize
+vmap <S-T> :Tab/\|<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Filetype specific
 """""""""""""""""""""""""""""""""""""""""""""
 
+""" Java
 autocmd Filetype java setlocal colorcolumn=101
+autocmd Filetype objc,objcpp setlocal colorcolumn=101
