@@ -104,10 +104,9 @@ filetype on
 filetype plugin on
 
 " sets GNU grep to be the program to run when searching
-set grepprg=grep\ -rinH\ $*
+set grepprg=grep\ -rnH\ $*
 
 " what the mouse pointer looks like in different modes
-" set mouses=i-r:beam,s:updown,sd:udsizing,vs:leftright,vd:lrsizing,m:no,ml:up-arrow,v:rightup-arrow
 set mouse=""
 
 " Remove menu bar
@@ -118,6 +117,8 @@ set colorcolumn=81
 
 " Make the dividers look nicer
 set fillchars+=vert:│
+
+set hlsearch
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
@@ -147,9 +148,6 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 
-inoremap jj <esc>
-inoremap jk <esc>
-inoremap kk <esc>
 inoremap kj <esc>
 
 " Make yank not stupid
@@ -182,14 +180,7 @@ nnoremap k gk
 
 nnoremap Q gqap
 
-" Disable highlighting by hitting escape.
-nnoremap <silent> <esc> :noh<cr><esc>
-
 cmap <C-V> <C-R>+
-
-" Enable * and # in visual mode to make it easier to search for things.
-" vnoremap * yo<esc>pV:s-/-\\/-ge<cr>0y$u/\<<c-r>"<cr>\>
-" vnoremap # yo<esc>pV:s-/-\\/-ge<cr>0y$u?\<<c-r>"<cr>\>
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
@@ -220,8 +211,6 @@ endfunction
 
 nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
-" autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
-" autocmd BufWritePre Filetype cpp :call Preserve("FormatCode")
 
 " replace selected text with text in paste register, without overwriting the
 " text in the yank register with the text replaced.
