@@ -1,3 +1,7 @@
+" This is the vimrc file for use across all computers I use.
+" Changes specific to a specific computer should go in ~/.vimrc.
+" Changes specific to NeoVim should go in ~/.vim/init.vim
+
 set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""
@@ -12,14 +16,18 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-" My bundles here:
 " Bundle 'kien/ctrlp.vim'
+" My bundles here:
+Bundle 'Quramy/tsuquyomi'
+Bundle 'Shougo/vimproc.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'leafgarland/typescript-vim'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdtree'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
+Bundle 'vim-scripts/Conque-GDB'
 Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/abolish.vim'
@@ -134,10 +142,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-if has('nvim')
-  nmap <BS> <C-W>h
-endif
-
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 nnoremap <up> <nop>
@@ -147,6 +151,32 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
+
+inoremap <ScrollWheelUp> <nop>
+inoremap <S-ScrollWheelUp> <nop>
+inoremap <C-ScrollWheelUp> <nop>
+inoremap <ScrollWheelDown> <nop>
+inoremap <S-ScrollWheelDown> <nop>
+inoremap <C-ScrollWheelDown> <nop>
+inoremap <ScrollWheelLeft> <nop>
+inoremap <S-ScrollWheelLeft> <nop>
+inoremap <C-ScrollWheelLeft> <nop>
+inoremap <ScrollWheelRight> <nop>
+inoremap <S-ScrollWheelRight> <nop>
+inoremap <C-ScrollWheelRight> <nop>
+
+nnoremap <ScrollWheelUp> <nop>
+nnoremap <S-ScrollWheelUp> <nop>
+nnoremap <C-ScrollWheelUp> <nop>
+nnoremap <ScrollWheelDown> <nop>
+nnoremap <S-ScrollWheelDown> <nop>
+nnoremap <C-ScrollWheelDown> <nop>
+nnoremap <ScrollWheelLeft> <nop>
+nnoremap <S-ScrollWheelLeft> <nop>
+nnoremap <C-ScrollWheelLeft> <nop>
+nnoremap <ScrollWheelRight> <nop>
+nnoremap <S-ScrollWheelRight> <nop>
+nnoremap <C-ScrollWheelRight> <nop>
 
 inoremap kj <esc>
 
@@ -239,6 +269,8 @@ vnoremap g/ :TComment<CR>
 """ Bufexplorer
 " Do not show default help.
 let g:bufExplorerDefaultHelp=0
+" Sort by full file path name.
+let g:bufExplorerSortBy='fullpath'
 nnoremap <C-b> :BufExplorer<cr>
 
 """ NERDTree
