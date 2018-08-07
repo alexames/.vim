@@ -4,6 +4,14 @@
 
 set nocompatible
 
+" Used throughout to source platform specific 
+function! SourceIfExists(file)
+  if filereadable(expand(a:file))
+    exe 'source' a:file
+  endif
+endfunction
+
+
 """""""""""""""""""""""""""""""""""""""""""""
 " Set up Vundle
 """""""""""""""""""""""""""""""""""""""""""""
@@ -18,26 +26,23 @@ Bundle 'gmarik/vundle'
 
 " Bundle 'kien/ctrlp.vim'
 " My bundles here:
-Bundle 'Quramy/tsuquyomi'
+Bundle 'gabesoft/vim-ags'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'leafgarland/typescript-vim'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdtree'
-Bundle 'terryma/vim-multiple-cursors'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/Conque-GDB'
 Bundle 'vim-scripts/Parameter-Text-Objects'
 Bundle 'vim-scripts/a.vim'
 Bundle 'vim-scripts/abolish.vim'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/bufkill.vim'
-Bundle 'vim-scripts/clang-complete'
 Bundle 'vim-scripts/mru.vim'
-Bundle 'vim-scripts/snipmate'
 Bundle 'vim-scripts/surround.vim'
 Bundle 'vim-scripts/tComment'
+
+call SourceIfExists('~/.vimlocal/bundles')
 
 filetype plugin indent on     " required!
 
@@ -253,6 +258,19 @@ function! PasteOver()
      return "p@=RestoreRegister()\<cr>"
 endfunction
 vnoremap <silent> <expr> p PasteOver()
+
+" Format on save
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""
 " Plugins
