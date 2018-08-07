@@ -4,7 +4,7 @@
 
 set nocompatible
 
-" Used throughout to source platform specific 
+" Used throughout to source platform specific
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
@@ -21,14 +21,12 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required!
 Bundle 'gmarik/vundle'
 
-" Bundle 'kien/ctrlp.vim'
 " My bundles here:
 Bundle 'gabesoft/vim-ags'
-Bundle 'Shougo/vimproc.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 Bundle 'nelstrom/vim-visual-star-search'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-fugitive'
@@ -133,6 +131,9 @@ set fillchars+=vert:│
 
 set hlsearch
 
+" Reload files if they've changed so we don't operate on stale data.
+set autoread
+
 """""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """""""""""""""""""""""""""""""""""""""""""""
@@ -217,6 +218,8 @@ nnoremap Q gqap
 
 cmap <C-V> <C-R>+
 
+" tnoremap <Esc> <C-\><C-n>
+
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
 """""""""""""""""""""""""""""""""""""""""""""
@@ -244,7 +247,7 @@ function! Preserve(command)
     call winrestview(w)
 endfunction
 
-nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
+" nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " replace selected text with text in paste register, without overwriting the
@@ -288,13 +291,14 @@ vnoremap g/ :TComment<CR>
 " Do not show default help.
 let g:bufExplorerDefaultHelp=0
 " Sort by full file path name.
-let g:bufExplorerSortBy='fullpath'
+let g:bufExplorerSortBy='name'
 nnoremap <C-b> :BufExplorer<cr>
 
 """ NERDTree
 nnoremap <f2> :NERDTreeToggle<CR>
 nnoremap <f3> :NERDTreeFind<CR>
 let NERDTreeMinimalUI=1
+let NERDTreeShowHidden=1
 let NERDTreeWinSize=48
 
 """ vim-multiple-cursors
@@ -306,10 +310,25 @@ let g:alternateExtensions_mm = "h"
 
 """ CtrlP
 " Ignore the following files in ctrl-P
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
-  \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
-  \ }
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
+"   \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
+"   \ }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore bin
+      \ --ignore obj
+      \ --ignore tmp
+      \ --ignore CMakeFiles
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ --ignore .git5_specs
+      \ --ignore review
+      \ -g ""'
+let g:ctrlp_root_markers = ['METADATA']
+nnoremap <C-P> :CtrlPMRUFiles<CR>
 
 """ Tabularize
 vmap <S-T> :Tab/\|<CR>
