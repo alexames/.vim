@@ -39,6 +39,8 @@ Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/surround.vim'
 Bundle 'vim-scripts/tComment'
+Bundle 'scrooloose/syntastic'
+Bundle 'SirVer/ultisnips'
 
 call SourceIfExists('~/.vimlocal/bundles')
 
@@ -218,16 +220,14 @@ nnoremap Q gqap
 
 cmap <C-V> <C-R>+
 
-" tnoremap <Esc> <C-\><C-n>
-
 """""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
 """""""""""""""""""""""""""""""""""""""""""""
 
 " When vimrc is edited, reload it
-autocmd! bufwritepost ~/.vimrc source $MYVIMRC
-autocmd! bufwritepost ~/.vim/init.vim source $MYVIMRC
-autocmd! bufwritepost ~/.vim/vimrc source $MYVIMRC
+autocmd! bufwritepost $HOME/.vimrc source $MYVIMRC
+autocmd! bufwritepost $HOME/.vim/init.vim source $MYVIMRC
+autocmd! bufwritepost $HOME/.vim/vimrc source $MYVIMRC
 autocmd! bufwritepost $VIM/vimfiles/vimrc source $MYVIMRC
 
 " Display matches of last search in window
@@ -279,6 +279,16 @@ augroup END
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""
 
+""" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 """ MRU
 let MRU_Max_Entries = 500
 nnoremap <leader>m :MRU<CR>
@@ -300,9 +310,6 @@ nnoremap <f3> :NERDTreeFind<CR>
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=48
-
-""" vim-multiple-cursors
-let g:multi_cursor_exit_from_insert_mode = 0
 
 """ alternate
 let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
