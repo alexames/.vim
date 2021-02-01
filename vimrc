@@ -41,7 +41,7 @@ Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/surround.vim'
 Bundle 'vim-scripts/tComment'
 " Bundle 'scrooloose/syntastic'
-Bundle 'SirVer/ultisnips'
+" Bundle 'SirVer/ultisnips'
 
 call SourceIfExists('~/.vimlocal/bundles')
 
