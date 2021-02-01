@@ -24,6 +24,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles here:
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'gabesoft/vim-ags'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
@@ -39,7 +40,7 @@ Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/mru.vim'
 Bundle 'vim-scripts/surround.vim'
 Bundle 'vim-scripts/tComment'
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 Bundle 'SirVer/ultisnips'
 
 call SourceIfExists('~/.vimlocal/bundles')
@@ -49,6 +50,11 @@ filetype plugin indent on     " required!
 """""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
 """""""""""""""""""""""""""""""""""""""""""""
+
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
 
 " Sets the titlebar of the terminal to be the name of the file
 set title
@@ -280,9 +286,9 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""
 
 """ Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -290,6 +296,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 """ MRU
+let MRU_Exclude_Files = '^/google/src/files/.*|^/tmp/.*|^/var/tmp/.*'
 let MRU_Max_Entries = 500
 nnoremap <leader>m :MRU<CR>
 
