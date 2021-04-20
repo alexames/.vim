@@ -12,9 +12,9 @@ function! SourceIfExists(file)
 endfunction
 
 
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set up Vundle
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off                  " required!
 
 set rtp+=~/.vim/bundle/vundle/
@@ -24,32 +24,70 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles here:
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'gabesoft/vim-ags'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
-Bundle 'nelstrom/vim-visual-star-search'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/Parameter-Text-Objects'
-Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/abolish.vim'
-Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'vim-scripts/bufkill.vim'
-Bundle 'vim-scripts/mru.vim'
-Bundle 'vim-scripts/surround.vim'
-Bundle 'vim-scripts/tComment'
-" Bundle 'scrooloose/syntastic'
-" Bundle 'SirVer/ultisnips'
 
+" UltiSnips is the ultimate solution for snippets in Vim.
+if has("python3")
+  Bundle 'SirVer/ultisnips'
+endif
+" Solarized Colorscheme for Vim.
+Bundle 'altercation/vim-colors-solarized'
+" Silver searcher (AG) plugin for Vim.
+Bundle 'gabesoft/vim-ags'
+" Sometimes, it's useful to line up text.
+Bundle 'godlygeek/tabular'
+" codefmt is a utility for syntax-aware code formatting.
+Bundle 'google/vim-codefmt'
+" Maktaba is a vimscript library for plugin authors.
+Bundle 'google/vim-glaive'
+" Maktaba is a vimscript plugin library. It is designed for plugin authors.
+Bundle 'google/vim-maktaba'
+" Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
+Bundle 'ctrlpvim/ctrlp.vim'
+" CMake integration.
+Bundle 'ilyachur/cmake4vim'
+" Select text in visual mode and then hit * and # to search for it elsewhere.
+Bundle 'nelstrom/vim-visual-star-search'
+" The NERDTree is a file system explorer for the Vim editor.
+Bundle 'scrooloose/nerdtree'
+" Syntastic is a syntax checking plugin for Vim.
+Bundle 'scrooloose/syntastic'
+" Fugitive is the premier Vim plugin for Git.
+Bundle 'tpope/vim-fugitive'
+" Repeat.vim remaps . in a way that plugins can tap into it.
+Bundle 'tpope/vim-repeat'
+" This script defines a parameter text object.
+Bundle 'vim-scripts/Parameter-Text-Objects'
+" A few of quick commands to swtich between source files and header files 
+" quickly.
+Bundle 'vim-scripts/a.vim'
+" Improved case sensitive substitution and variable name coercion.
+Bundle 'vim-scripts/abolish.vim'
+" With bufexplorer, you can quickly and easily switch between buffers.
+Bundle 'vim-scripts/bufexplorer.zip'
+" This is a script to unload, delete or wipe a buffer without closing the 
+" window.
+Bundle 'vim-scripts/bufkill.vim'
+" The Most Recently Used (MRU) plugin.
+Bundle 'vim-scripts/mru.vim'
+" Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML 
+" tags, and more.
+Bundle 'vim-scripts/surround.vim'
+" TComment works like a toggle, i.e., it will comment out text that contains 
+" uncommented lines, and it will uncomment already commented text (i.e. text 
+" that contains no uncommented lines).
+Bundle 'vim-scripts/tComment'
+" A code-completion engine for Vim
+if has("python3")
+  Bundle 'ycm-core/YouCompleteMe'
+endif
+ 
 call SourceIfExists('~/.vimlocal/bundles')
 
-filetype plugin indent on     " required!
+filetype plugin indent on  " required!
 
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax enable
 set background=dark
@@ -137,14 +175,21 @@ set colorcolumn=81
 " Make the dividers look nicer
 set fillchars+=vert:│
 
+" Highlight search results
 set hlsearch
 
 " Reload files if they've changed so we don't operate on stale data.
 set autoread
 
-"""""""""""""""""""""""""""""""""""""""""""""
+" Show the status bar, even when there's only one file open
+set laststatus=2
+
+" Disable swap files. I save often enough that these just get in the way.
+set noswapfile
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Fast editing of the .vimrc
 nnoremap <leader>v :tabe! $MYVIMRC<CR>
@@ -226,9 +271,9 @@ nnoremap Q gqap
 
 cmap <C-V> <C-R>+
 
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other neat stuff
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost $HOME/.vimrc source $MYVIMRC
@@ -281,75 +326,120 @@ augroup autoformat_settings
   " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+" Plugin: SirVer/ultisnips
+" No customizations.
+
+" Plugin: altercation/vim-colors-solarized
+" No customizations.
+
+" Plugin: gabesoft/vim-ags
+" No customizations.
+
+" Plugin: godlygeek/tabular
+
+vmap <S-T> :Tab/\|<CR>
+
+" Plugin: google/vim-codefmt
+" Plugin: google/vim-glaive
+" Plugin: google/vim-maktaba
+" Plugin: ctrlpvim/ctrlp.vim
+
+" Ignore the following files in ctrl-P
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
+    \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
+    \ }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+    \ --ignore .git
+    \ --ignore .svn
+    \ --ignore .hg
+    \ --ignore bin
+    \ --ignore obj
+    \ --ignore tmp
+    \ --ignore CMakeFiles
+    \ --ignore .DS_Store
+    \ --ignore "**/*.pyc"
+    \ --ignore .git5_specs
+    \ --ignore review
+    \ -g ""'
+let g:ctrlp_root_markers = ['METADATA', 'Assets']
+nnoremap <C-P> :CtrlPMRUFiles<CR>
+
+" Plugin: nelstrom/vim-visual-star-search
+" No customizations.
+
+" Plugin: scrooloose/nerdtree
+
+nnoremap <f2> :NERDTreeToggle<CR>
+nnoremap <f3> :NERDTreeFocus<CR>
+nnoremap <f4> :NERDTreeFind<CR>
+let NERDTreeMinimalUI=1
+let NERDTreeShowHidden=1
+let NERDTreeWinSize=48
+
+" Plugin: scrooloose/syntastic
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-""" MRU
-let MRU_Exclude_Files = '^/google/src/files/.*|^/tmp/.*|^/var/tmp/.*'
-let MRU_Max_Entries = 500
-nnoremap <leader>m :MRU<CR>
 
-""" TComment
-nnoremap g/ :TComment<CR>
-vnoremap g/ :TComment<CR>
+" Plugin: tpope/vim-fugitive
+" No customizations.
 
-""" Bufexplorer
+" Plugin: tpope/vim-repeat
+" No customizations.
+
+" Plugin: vim-scripts/Parameter-Text-Objects
+" No customizations.
+
+" Plugin: vim-scripts/a.vim
+
+let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
+let g:alternateExtensions_mm = "h"
+
+" Plugin: vim-scripts/abolish.vim
+" No customizations.
+
+" Plugin: vim-scripts/bufexplorer.zip
+
 " Do not show default help.
 let g:bufExplorerDefaultHelp=0
 " Sort by full file path name.
 let g:bufExplorerSortBy='name'
 nnoremap <C-b> :BufExplorer<cr>
 
-""" NERDTree
-nnoremap <f2> :NERDTreeToggle<CR>
-nnoremap <f3> :NERDTreeFind<CR>
-let NERDTreeMinimalUI=1
-let NERDTreeShowHidden=1
-let NERDTreeWinSize=48
+" Plugin: vim-scripts/bufkill.vim
+" No customizations.
 
-""" alternate
-let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
-let g:alternateExtensions_mm = "h"
+" Plugin: vim-scripts/mru.vim
 
-""" CtrlP
-" Ignore the following files in ctrl-P
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v(\.(git|hg|svn)|bin|obj|tmp|CMakeFiles)$',
-"   \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp))|CMakeCache.txt)$',
-"   \ }
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .svn
-      \ --ignore .hg
-      \ --ignore bin
-      \ --ignore obj
-      \ --ignore tmp
-      \ --ignore CMakeFiles
-      \ --ignore .DS_Store
-      \ --ignore "**/*.pyc"
-      \ --ignore .git5_specs
-      \ --ignore review
-      \ -g ""'
-let g:ctrlp_root_markers = ['METADATA']
-nnoremap <C-P> :CtrlPMRUFiles<CR>
+let MRU_Exclude_Files = '^/google/src/files/.*|^/tmp/.*|^/var/tmp/.*'
+let MRU_Max_Entries = 500
 
-""" Tabularize
-vmap <S-T> :Tab/\|<CR>
+nnoremap <leader>m :MRU<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: vim-scripts/surround.vim
+" No customizations.
+
+" Plugin: vim-scripts/tComment
+
+nnoremap g/ :TComment<CR>
+vnoremap g/ :TComment<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype specific
-"""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """ Java
 autocmd Filetype java setlocal colorcolumn=101
