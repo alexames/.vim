@@ -219,7 +219,10 @@ let MRU_Exclude_Files = '\v
       \^/google/src/files/.*|
       \^/tmp/.*|
       \^/var/tmp/.*|
-      \^/usr/include'
+      \^/usr/include/.*|
+      \.*COMMIT_EDITMSG|
+      \.*MERGE_MSG'
+
 let MRU_Max_Entries = 500
 
 """"""""""""""""""""""""""""""""""""""""
