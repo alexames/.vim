@@ -44,7 +44,7 @@ nnoremap j gj
 nnoremap k gk
 
 " By default Y yanks the whole line unlike C and D, which operate from the
-" cursor position to the end of the line. Make Y behave like C or D, it should 
+" cursor position to the end of the line. Make Y behave like C or D, it should
 " yank to the end of the line.
 map Y y$
 
@@ -120,7 +120,7 @@ vnoremap <silent> <expr> p PasteOver()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: godlygeek/tabular
 
-vmap <S-T> :Tab/\|<CR>
+vmap <S-T> :Tab /\|<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: 'ilyachur/cmake4vim'
@@ -156,12 +156,12 @@ vnoremap g/ :TComment<CR>
 " Plugin 'ycm-core/YouCompleteMe'
 
 nnoremap ti :YcmCompleter GoToInclude<cr>
-nnoremap tf :YcmCompleter GoToInclude<cr>
 nnoremap tD :YcmCompleter GoToDeclaration<cr>
 nnoremap td :YcmCompleter GoToDefinition<cr>
 nnoremap ts :YcmCompleter GoTo<cr>
-nnoremap T :YcmCompleter GoTo<cr>
 nnoremap tr :YcmCompleter GoToReferences<cr>
-nnoremap <C-s> <Plug>(YCMFindSymbolInWorkspace)
-nmap tt <Plug>(YCMFindSymbolInWorkspace)
+
+nmap fs <Plug>(YCMFindSymbolInWorkspace)
+
+nnoremap <leader>r :YcmCompleter RefactorRename
 

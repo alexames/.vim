@@ -37,7 +37,6 @@ Plugin 'google/vim-codefmt'                 " clang-format integration.
 Plugin 'puremourning/vimspector'            " GDB integration.
 Plugin 'ycm-core/YouCompleteMe'             " Language-semantic-aware autocompletion and other features.
 Plugin 'gabesoft/vim-ags'                   " Silver searcher (ag, a grep alternative) integration.
-Plugin 'SirVer/ultisnips'                   " Snippets.
 
 " Filesystem navigation.
 Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
@@ -79,20 +78,26 @@ set noerrorbells           " Does not make a sound when there is an error.
 set whichwrap+=<,>,h,l     " Backspace config.
 set scrolloff=2            " ensures the cursor never reaches the bottom of the window.
 set smartindent            " Intelligently guess the indentation level of the next line.
-set number                 " Shows number along the left side.
+set relativenumber         " Shows relative line numbers, making linewise motions easier.
+set number                 " Display the absolute line number for the current line.
 set formatoptions-=t       " Don't wrap to new lines at 80 characters automatically.
 set noswapfile             " Disable swap files. I save often enough that these just get in the way.
 set grepprg=grep\ -rnH\ $* " sets GNU grep to be the program to run when searching.
+                           "   -r: recursive by default
+                           "   -n: show line numbers
+                           "   -H: show filenames
 set mouse=""               " what the mouse pointer looks like in different modes.
 set guioptions=rLte        " Remove menu bar when using a GUI (gvim).
-set list                   " Display listchars below.
+set list                   " Visible whitespace, displayed using listchars below.
 set listchars=tab:\ \ ┊,
              \space:·,
+             \trail:•,
              \extends:…,
              \precedes:…,
-             \nbsp:.
+             \nbsp:.,
+             \eol:$,
 set colorcolumn=81         " Put a line at 80 characters.
-                           " But java and objective C should be set to 101.
+                           " But java and Objective-C should be set to 101.
 autocmd Filetype java setlocal colorcolumn=101
 autocmd Filetype objc,objcpp setlocal colorcolumn=101
 
@@ -103,9 +108,9 @@ set smartcase              " Ignore the ignorecase option if search pattern cont
 
 " Tab settings
 set expandtab              " Tab key creates spaces instead of tabs.
-set tabstop=4              " Tabs are 4 spaces.
-set shiftwidth=4           " Tab characters are 4 spaces.
-set softtabstop=4          " Soft tabs are 4 spaces.
+set tabstop=2              " Tabs are 2 spaces.
+set shiftwidth=2           " Tab characters are 2 spaces.
+set softtabstop=2          " Soft tabs are 2 spaces.
 
 " Fold settings
 set foldenable
@@ -159,10 +164,17 @@ source ~/.vim/keybinds.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""
+" Plugin 'altercation/vim-colors-solarized'
+
+let g:solarized_termcolors=256
+let g:solarized_visibility="low"
+
+""""""""""""""""""""""""""""""""""""""""
 " Plugin 'ilyachur/cmake4vim'
 
-let g:cmake_build_dir_prefix='build'
-let g:cmake_usr_args='-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+let g:cmake_compile_commands=1
+let g:cmake_compile_commands_link=1
+let g:cmake_vimspector_support=1
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'ctrlpvim/ctrlp.vim'
@@ -190,7 +202,6 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 
 " This sets additional root markers.
 " The defaults are .git, .hg, .svn, .bzr, and _darcs
-let g:ctrlp_root_markers = ['']
 let g:ctrlp_root_markers = ['METADATA', 'Assets']
 
 """"""""""""""""""""""""""""""""""""""""
@@ -225,8 +236,3 @@ let MRU_Exclude_Files = '\v
 
 let MRU_Max_Entries = 500
 
-""""""""""""""""""""""""""""""""""""""""
-" Plugin 'altercation/vim-colors-solarized'
-
-let g:solarized_termcolors=256
-let g:solarized_visibility="low"
