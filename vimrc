@@ -1,6 +1,5 @@
 " This is the vimrc file for use across all computers I use.
 " Changes specific to a specific computer should go in ~/.vimrc.
-" Changes specific to NeoVim should go in ~/.vim/init.vim
 
 set nocompatible
 
@@ -32,6 +31,7 @@ Plugin 'google/vim-glaive'                  " Glaive is a utility for configurin
 
 " IDE Feature integrations.
 Plugin 'tpope/vim-fugitive'                 " Git integration.
+Plugin 'airblade/vim-gitgutter'             " Git integration.
 Plugin 'ilyachur/cmake4vim'                 " CMake integration.
 Plugin 'google/vim-codefmt'                 " clang-format integration.
 Plugin 'puremourning/vimspector'            " GDB integration.
@@ -116,6 +116,9 @@ set softtabstop=2          " Soft tabs are 2 spaces.
 set foldenable
 set foldmethod=syntax
 set foldlevel=1000
+
+set updatetime=100
+set signcolumn=number
 
 " When vimrc is edited, reload it.
 autocmd! bufwritepost $HOME/.vimrc source $MYVIMRC
