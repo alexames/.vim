@@ -68,11 +68,6 @@ nnoremap <leader>v :tabe! $MYVIMRC<CR>
 " This is where build output and search results go.
 nnoremap <leader>cw :botright cwindow<CR>
 
-" kj can be used to exit insert mode. The key sequence is almost never
-" legitimately used, and sometimes it's useful to be able to escape using this
-" sequence.
-inoremap kj <esc>
-
 " Fat-finger fixes - common typos I make that are annoying.
 map <S-k> k
 nnoremap ! :!
