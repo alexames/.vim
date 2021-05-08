@@ -66,8 +66,8 @@ filetype plugin indent on  " required!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set background=dark        " Use the dark colorscheme instead of the light one.
-colorscheme one
-let g:airline_theme='one'
+colorscheme onedark
+let g:airline_theme='onedark'
 
 set title                  " Sets the titlebar of the terminal to be the name of the file.
 set hidden                 " Hides buffers rather than closing them when opening a new buffer.
