@@ -62,6 +62,7 @@ Plug 'vim-scripts/surround.vim'           " Surround.vim is all about surroundin
 Plug 'vim-scripts/tComment'               " Filetype aware comment toggle.
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'                   " Fuzzy Finder functionality for buffers, history, files, etc.
+Plug 'junegunn/vim-peekaboo'              " When using registers, pop open a window to display them
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
