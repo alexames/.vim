@@ -63,6 +63,7 @@ Plug 'vim-scripts/tComment'               " Filetype aware comment toggle.
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'                   " Fuzzy Finder functionality for buffers, history, files, etc.
 Plug 'junegunn/vim-peekaboo'              " When using registers, pop open a window to display them
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
@@ -171,34 +172,6 @@ let g:cmake_compile_commands_link=1
 let g:cmake_vimspector_support=1
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin 'ctrlpvim/ctrlp.vim'
-"
-" " Ignore the following files in ctrl-P
-" let g:ctrlp_custom_ignore = {
-"     \ 'dir':  '\v(\.git|\.hg|\.svn|bin|obj|tmp|build|CMakeFiles)',
-"     \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp)$)|CMakeCache.txt)',
-"     \ }
-"
-" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-"     \ --ignore .git
-"     \ --ignore .svn
-"     \ --ignore .hg
-"     \ --ignore bin
-"     \ --ignore obj
-"     \ --ignore tmp
-"     \ --ignore CMakeFiles
-"     \ --ignore cmake-build-*
-"     \ --ignore .DS_Store
-"     \ --ignore "**/*.pyc"
-"     \ --ignore .git5_specs
-"     \ --ignore review
-"     \ -g ""'
-"
-" " This sets additional root markers.
-" " The defaults are .git, .hg, .svn, .bzr, and _darcs
-" let g:ctrlp_root_markers = ['METADATA', 'Assets']
-
-""""""""""""""""""""""""""""""""""""""""
 " Plugin 'scrooloose/nerdtree'
 
 let NERDTreeMinimalUI=1
@@ -212,21 +185,11 @@ let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
 let g:alternateExtensions_mm = "h"
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin 'vim-scripts/bufexplorer.zip'
-"
-" let g:bufExplorerDefaultHelp=0 " Do not show default help.
-" let g:bufExplorerSortBy='name' " Sort by full file path name.
+" Plugin 'junegunn/rainbow_parentheses.vim'
 
-""""""""""""""""""""""""""""""""""""""""
-" Plugin 'vim-scripts/mru.vim'
-"
-" let MRU_Exclude_Files = '\v
-"       \^/google/src/files/.*|
-"       \^/tmp/.*|
-"       \^/var/tmp/.*|
-"       \^/usr/include/.*|
-"       \.*COMMIT_EDITMSG|
-"       \.*MERGE_MSG'
-"
-" let MRU_Max_Entries = 500
-"
+" Activation based on file type
+augroup rainbow_parens
+  autocmd!
+  autocmd FileType cpp,python RainbowParentheses
+augroup END
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
