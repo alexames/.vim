@@ -3,13 +3,6 @@
 
 set nocompatible
 
-" Used throughout to source platform specific
-function! SourceIfExists(file)
-  if filereadable(expand(a:file))
-    exe 'source' a:file
-  endif
-endfunction
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -22,12 +15,20 @@ call vundle#rc()
 
 " Basic stuff.
 Plugin 'gmarik/vundle'                      " Let Vundle manage Vundle.
-Plugin 'altercation/vim-colors-solarized'   " Solarized Colorscheme for Vim.
 Plugin 'tpope/vim-sensible'                 " Sensible default settings
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+
+" Colorschemes
+Plugin 'ghifarit53/tokyonight-vim'
+Plugin 'joshdick/onedark.vim'
+Plugin 'pineapplegiant/spaceduck'
+Plugin 'rakr/vim-one'
 
 " Utility libraries, prereq for other libraries.
 Plugin 'google/vim-maktaba'                 " Maktaba is a vimscript plugin library. It is designed for plugin authors.
 Plugin 'google/vim-glaive'                  " Glaive is a utility for configuring maktaba plugins.
+Plugin 'kana/vim-textobj-user'              " Helps define custom text objects. Needed for parameter text objects below.
 
 " IDE Feature integrations.
 Plugin 'tpope/vim-fugitive'                 " Git integration.
@@ -50,7 +51,7 @@ Plugin 'vim-scripts/mru.vim'                " The Most Recently Used (MRU) plugi
 Plugin 'nelstrom/vim-visual-star-search'    " Select text in visual mode and then hit * and # to search for it elsewhere.
 Plugin 'tpope/vim-obsession'                " Make managing vim session easier.
 Plugin 'tpope/vim-repeat'                   " Repeat.vim remaps . in a way that plugins can tap into it.
-Plugin 'vim-scripts/Parameter-Text-Objects' " This script defines a parameter text object.
+Plugin 'sgur/vim-textobj-parameter'         " This script defines a parameter text object.
 Plugin 'vim-scripts/abolish.vim'            " Improved case sensitive substitution and variable name coercion.
 Plugin 'vim-scripts/surround.vim'           " Surround.vim is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
 Plugin 'vim-scripts/tComment'               " Filetype aware comment toggle.
@@ -64,12 +65,14 @@ filetype plugin indent on  " required!
 "                                Basic Options                                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme solarized
+set background=dark        " Use the dark colorscheme instead of the light one.
+colorscheme one
+let g:airline_theme='one'
 
 set title                  " Sets the titlebar of the terminal to be the name of the file.
-set background=dark        " Use the dark colorscheme instead of the light one.
 set hidden                 " Hides buffers rather than closing them when opening a new buffer.
 set nolazyredraw           " Don't redraw while executing macros.
+set noshowmode
 set cursorline             " Highlight the line the cursor is on.
 set magic                  " All characters except /[a-zA-Z0-9_]/ use their special meaning
 set history=1000           " Increases the command history.
@@ -142,20 +145,6 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
-" Give me relevant info in my status bar.
-set statusline=
-set statusline+=%f                                         " Filename
-set statusline+=\ %m                                       " Edit status
-set statusline+=\ %=                                       " Spacer
-set statusline+=\ %{ObsessionStatus()}                     " Whether an Obsess session is running
-set statusline+=\ [CMake(%{g:cmake_build_target})]         " CMake build type and target
-set statusline+=\ %{FugitiveStatusline()}                  " Git branch
-set statusline+=\ %y                                       " Filetype
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding} " File encoding
-set statusline+=\ [%{&fileformat}\]                        " Line endings, I think
-set statusline+=\ %p%%                                     " Cursor vertical position percerntage
-set statusline+=\ %l:%c                                    " Row & Column
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Keybinds                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,12 +154,6 @@ source ~/.vim/keybinds.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Plugins Options                                "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""
-" Plugin 'altercation/vim-colors-solarized'
-
-let g:solarized_termcolors=256
-let g:solarized_visibility="low"
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'ilyachur/cmake4vim'
