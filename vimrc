@@ -10,56 +10,66 @@ set nocompatible
 " required: This must go first.
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+""""""""""""""""""""""""""""""""""""""""
+" vim-plug automatic installation
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Plugins will be downloaded under the specified directory.
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " Basic stuff.
-Plugin 'gmarik/vundle'                      " Let Vundle manage Vundle.
-Plugin 'tpope/vim-sensible'                 " Sensible default settings
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
+Plug 'tpope/vim-sensible'                 " Sensible default settings.
+Plug 'vim-airline/vim-airline'            " Status bar configuration.
+Plug 'vim-airline/vim-airline-themes'     " Status bar color themes.
 
 " Colorschemes
-Plugin 'ghifarit53/tokyonight-vim'
-Plugin 'joshdick/onedark.vim'
-Plugin 'pineapplegiant/spaceduck'
-Plugin 'rakr/vim-one'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'pineapplegiant/spaceduck'
+Plug 'rakr/vim-one'
 
 " Utility libraries, prereq for other libraries.
-Plugin 'google/vim-maktaba'                 " Maktaba is a vimscript plugin library. It is designed for plugin authors.
-Plugin 'google/vim-glaive'                  " Glaive is a utility for configuring maktaba plugins.
-Plugin 'kana/vim-textobj-user'              " Helps define custom text objects. Needed for parameter text objects below.
+Plug 'google/vim-maktaba'                 " Maktaba is a vimscript plugin library. It is designed for plugin authors.
+Plug 'google/vim-glaive'                  " Glaive is a utility for configuring maktaba plugins.
+Plug 'kana/vim-textobj-user'              " Helps define custom text objects. Needed for parameter text objects below.
 
 " IDE Feature integrations.
-Plugin 'tpope/vim-fugitive'                 " Git integration.
-Plugin 'airblade/vim-gitgutter'             " Git integration.
-Plugin 'ilyachur/cmake4vim'                 " CMake integration.
-Plugin 'google/vim-codefmt'                 " clang-format integration.
-Plugin 'puremourning/vimspector'            " GDB integration.
-Plugin 'ycm-core/YouCompleteMe'             " Language-semantic-aware autocompletion and other features.
-Plugin 'gabesoft/vim-ags'                   " Silver searcher (ag, a grep alternative) integration.
+Plug 'tpope/vim-fugitive'                 " Git integration.
+Plug 'airblade/vim-gitgutter'             " Git in-file line changes.
+Plug 'ilyachur/cmake4vim'                 " CMake integration.
+Plug 'google/vim-codefmt'                 " clang-format integration.
+Plug 'puremourning/vimspector'            " GDB integration.
+Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clangd-completer' }
+                                          " Language-semantic-aware autocompletion and other features.
+Plug 'gabesoft/vim-ags'                   " Silver searcher (ag, a grep alternative) integration.
 
 " Filesystem navigation.
-Plugin 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
-Plugin 'scrooloose/nerdtree'                " A file system explorer for the Vim editor.
-Plugin 'vim-scripts/a.vim'                  " A few of quick commands to swtich between source files and header files quickly.
-Plugin 'vim-scripts/bufexplorer.zip'        " With bufexplorer, you can quickly and easily switch between buffers.
-Plugin 'vim-scripts/bufkill.vim'            " This is a script to unload, delete or wipe a buffer without closing the window.
-Plugin 'vim-scripts/mru.vim'                " The Most Recently Used (MRU) plugin.
+Plug 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
+Plug 'scrooloose/nerdtree'                " A file system explorer for the Vim editor.
+Plug 'vim-scripts/a.vim'                  " A few of quick commands to swtich between source files and header files quickly.
+Plug 'vim-scripts/bufexplorer.zip'        " With bufexplorer, you can quickly and easily switch between buffers.
+Plug 'vim-scripts/bufkill.vim'            " This is a script to unload, delete or wipe a buffer without closing the window.
+Plug 'vim-scripts/mru.vim'                " The Most Recently Used (MRU) plugin.
 
 " Editor improvement plugins.
-Plugin 'nelstrom/vim-visual-star-search'    " Select text in visual mode and then hit * and # to search for it elsewhere.
-Plugin 'tpope/vim-obsession'                " Make managing vim session easier.
-Plugin 'tpope/vim-repeat'                   " Repeat.vim remaps . in a way that plugins can tap into it.
-Plugin 'sgur/vim-textobj-parameter'         " This script defines a parameter text object.
-Plugin 'vim-scripts/abolish.vim'            " Improved case sensitive substitution and variable name coercion.
-Plugin 'vim-scripts/surround.vim'           " Surround.vim is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
-Plugin 'vim-scripts/tComment'               " Filetype aware comment toggle.
+Plug 'nelstrom/vim-visual-star-search'    " Select text in visual mode and then hit * and # to search for it elsewhere.
+Plug 'tpope/vim-obsession'                " Make managing vim session easier.
+Plug 'tpope/vim-repeat'                   " Repeat.vim remaps . in a way that plugins can tap into it.
+Plug 'sgur/vim-textobj-parameter'         " This script defines a parameter text object.
+Plug 'vim-scripts/abolish.vim'            " Improved case sensitive substitution and variable name coercion.
+Plug 'vim-scripts/surround.vim'           " Surround.vim is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
+Plug 'vim-scripts/tComment'               " Filetype aware comment toggle.
 
 " Additional utilities.
-Plugin 'godlygeek/tabular'                  " Table alignment plugin.
+Plug 'godlygeek/tabular'                  " Table alignment plugin.
 
-filetype plugin indent on  " required!
+call plug#end()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Basic Options                                 "
