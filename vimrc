@@ -46,15 +46,11 @@ Plug 'google/vim-codefmt'                 " clang-format integration.
 Plug 'puremourning/vimspector'            " GDB integration.
 Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clangd-completer' }
                                           " Language-semantic-aware autocompletion and other features.
-Plug 'gabesoft/vim-ags'                   " Silver searcher (ag, a grep alternative) integration.
 
 " Filesystem navigation.
-Plug 'ctrlpvim/ctrlp.vim'                 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
 Plug 'scrooloose/nerdtree'                " A file system explorer for the Vim editor.
 Plug 'vim-scripts/a.vim'                  " A few of quick commands to swtich between source files and header files quickly.
-Plug 'vim-scripts/bufexplorer.zip'        " With bufexplorer, you can quickly and easily switch between buffers.
 Plug 'vim-scripts/bufkill.vim'            " This is a script to unload, delete or wipe a buffer without closing the window.
-Plug 'vim-scripts/mru.vim'                " The Most Recently Used (MRU) plugin.
 
 " Editor improvement plugins.
 Plug 'nelstrom/vim-visual-star-search'    " Select text in visual mode and then hit * and # to search for it elsewhere.
@@ -64,12 +60,13 @@ Plug 'sgur/vim-textobj-parameter'         " This script defines a parameter text
 Plug 'vim-scripts/abolish.vim'            " Improved case sensitive substitution and variable name coercion.
 Plug 'vim-scripts/surround.vim'           " Surround.vim is all about surroundings: parentheses, brackets, quotes, XML tags, and more.
 Plug 'vim-scripts/tComment'               " Filetype aware comment toggle.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'                   " Fuzzy Finder functionality for buffers, history, files, etc.
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
 
 call plug#end()
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                Basic Options                                 "
@@ -174,31 +171,31 @@ let g:cmake_vimspector_support=1
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'ctrlpvim/ctrlp.vim'
-
-" Ignore the following files in ctrl-P
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v(\.git|\.hg|\.svn|bin|obj|tmp|build|CMakeFiles)',
-    \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp)$)|CMakeCache.txt)',
-    \ }
-
-let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-    \ --ignore .git
-    \ --ignore .svn
-    \ --ignore .hg
-    \ --ignore bin
-    \ --ignore obj
-    \ --ignore tmp
-    \ --ignore CMakeFiles
-    \ --ignore cmake-build-*
-    \ --ignore .DS_Store
-    \ --ignore "**/*.pyc"
-    \ --ignore .git5_specs
-    \ --ignore review
-    \ -g ""'
-
-" This sets additional root markers.
-" The defaults are .git, .hg, .svn, .bzr, and _darcs
-let g:ctrlp_root_markers = ['METADATA', 'Assets']
+"
+" " Ignore the following files in ctrl-P
+" let g:ctrlp_custom_ignore = {
+"     \ 'dir':  '\v(\.git|\.hg|\.svn|bin|obj|tmp|build|CMakeFiles)',
+"     \ 'file': '\v((\.(exe|so|dll|bin|o|a|o.d|make|cbp)$)|CMakeCache.txt)',
+"     \ }
+"
+" let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+"     \ --ignore .git
+"     \ --ignore .svn
+"     \ --ignore .hg
+"     \ --ignore bin
+"     \ --ignore obj
+"     \ --ignore tmp
+"     \ --ignore CMakeFiles
+"     \ --ignore cmake-build-*
+"     \ --ignore .DS_Store
+"     \ --ignore "**/*.pyc"
+"     \ --ignore .git5_specs
+"     \ --ignore review
+"     \ -g ""'
+"
+" " This sets additional root markers.
+" " The defaults are .git, .hg, .svn, .bzr, and _darcs
+" let g:ctrlp_root_markers = ['METADATA', 'Assets']
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'scrooloose/nerdtree'
@@ -215,20 +212,20 @@ let g:alternateExtensions_mm = "h"
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'vim-scripts/bufexplorer.zip'
-
-let g:bufExplorerDefaultHelp=0 " Do not show default help.
-let g:bufExplorerSortBy='name' " Sort by full file path name.
+"
+" let g:bufExplorerDefaultHelp=0 " Do not show default help.
+" let g:bufExplorerSortBy='name' " Sort by full file path name.
 
 """"""""""""""""""""""""""""""""""""""""
 " Plugin 'vim-scripts/mru.vim'
-
-let MRU_Exclude_Files = '\v
-      \^/google/src/files/.*|
-      \^/tmp/.*|
-      \^/var/tmp/.*|
-      \^/usr/include/.*|
-      \.*COMMIT_EDITMSG|
-      \.*MERGE_MSG'
-
-let MRU_Max_Entries = 500
-
+"
+" let MRU_Exclude_Files = '\v
+"       \^/google/src/files/.*|
+"       \^/tmp/.*|
+"       \^/var/tmp/.*|
+"       \^/usr/include/.*|
+"       \.*COMMIT_EDITMSG|
+"       \.*MERGE_MSG'
+"
+" let MRU_Max_Entries = 500
+"

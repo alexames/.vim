@@ -120,7 +120,7 @@ vmap <S-T> :Tab /\|<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: 'ilyachur/cmake4vim'
 
-nnoremap <C-t> :CtrlPCMakeTarget<CR>
+nnoremap <C-t> :FZFCMakeSelectTarget<CR>
 nnoremap <leader>b :CMakeBuild<CR>
 nnoremap <f5> :CMakeRun<CR>
 
@@ -132,14 +132,12 @@ nnoremap <f3> :NERDTreeFocus<CR>
 nnoremap <f4> :NERDTreeFind<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-scripts/bufexplorer.zip
+" Plugin: junegunn/fzf.vim
 
-nnoremap <C-b> :BufExplorer<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-scripts/mru.vim
-
-nnoremap <leader>m :MRU<CR>
+nnoremap <C-p> :Files<cr>
+nnoremap <C-a> :Ag<cr>
+nnoremap <C-b> :Buffers<cr>
+nnoremap <C-m> :History<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: vim-scripts/tComment
@@ -157,6 +155,7 @@ nnoremap ts :YcmCompleter GoTo<cr>
 nnoremap tr :YcmCompleter GoToReferences<cr>
 
 nmap fs <Plug>(YCMFindSymbolInWorkspace)
+nmap <C-y> <Plug>(YCMFindSymbolInWorkspace)
 
 nnoremap <leader>r :YcmCompleter RefactorRename
 
