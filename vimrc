@@ -7,9 +7,6 @@ set nocompatible
 "                                   Plugins                                    "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" required: This must go first.
-filetype off
-
 """"""""""""""""""""""""""""""""""""""""
 " vim-plug automatic installation
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
