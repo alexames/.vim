@@ -24,7 +24,7 @@ Plug 'tpope/vim-sensible'                 " Sensible default settings.
 Plug 'vim-airline/vim-airline'            " Status bar configuration.
 Plug 'vim-airline/vim-airline-themes'     " Status bar color themes.
 
-" Colorschemes
+" Colorschemes.
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'pineapplegiant/spaceduck'
@@ -34,6 +34,7 @@ Plug 'rakr/vim-one'
 Plug 'google/vim-maktaba'                 " Maktaba is a vimscript plugin library. It is designed for plugin authors.
 Plug 'google/vim-glaive'                  " Glaive is a utility for configuring maktaba plugins.
 Plug 'kana/vim-textobj-user'              " Helps define custom text objects. Needed for parameter text objects below.
+Plug 'tpope/vim-dispatch'                 " Async utilities, mostly useful for other plugins.
 
 " IDE Feature integrations.
 Plug 'tpope/vim-fugitive'                 " Git integration.
@@ -59,8 +60,12 @@ Plug 'vim-scripts/surround.vim'           " Surround.vim is all about surroundin
 Plug 'vim-scripts/tComment'               " Filetype aware comment toggle.
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'                   " Fuzzy Finder functionality for buffers, history, files, etc.
+
+" Visual improvements.
 Plug 'junegunn/vim-peekaboo'              " When using registers, pop open a window to display them
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim'   " Make parens multicolored and matching
+Plug 'sheerun/vim-polyglot'               " Language packs for syntax highlighting.
+Plug 'Yggdroot/indentLine'                " Allow indentation lines for spaces.
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
@@ -107,6 +112,9 @@ set listchars=tab:\ \ ┊,
              \eol:$,
 set colorcolumn=81         " Put a line at 80 characters.
                            " But java and Objective-C should be set to 101.
+set fillchars=vert:┃,
+             \fold:━,
+             \diff:~,
 autocmd Filetype java setlocal colorcolumn=101
 autocmd Filetype objc,objcpp setlocal colorcolumn=101
 
@@ -148,7 +156,7 @@ augroup autoformat_settings
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,json AutoFormatBuffer js-beautify
   autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
+  " autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,3 +198,6 @@ augroup rainbow_parens
   autocmd FileType cpp,python RainbowParentheses
 augroup END
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+
+let g:indentLine_char = '│'

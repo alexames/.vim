@@ -86,7 +86,7 @@ function! Preserve(command)
     call winrestview(w)
 endfunction
 
-vnoremap <C-h> y:call Preserve("%s/<C-r>"//g")<left><left><left><left>
+vnoremap <C-h> y:call Preserve("%S/<C-r>"//g")<left><left><left><left>
 vnoremap <C-f> y:grep <C-r>" %:p:h
 
 " Q should format around paragraph
@@ -100,7 +100,7 @@ nnoremap <silent> <leader>g :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 " nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
 
-" replace selected text with text in paste register, without overwriting the
+" Replace selected text with text in paste register, without overwriting the
 " text in the yank register with the text replaced.
 function! RestoreRegister()
     let @" = s:restore_reg
@@ -111,6 +111,14 @@ function! PasteOver()
      return "p@=RestoreRegister()\<cr>"
 endfunction
 vnoremap <silent> <expr> p PasteOver()
+
+" Center the screen when jumping to successive search results.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: godlygeek/tabular
