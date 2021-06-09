@@ -61,6 +61,14 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+tnoremap <C-h> <C-w>h
+tnoremap <C-j> <C-w>j
+tnoremap <C-k> <C-w>k
+tnoremap <C-l> <C-w>l
+
+tnoremap : <C-W>:
+tnoremap :: :
+
 " Use \v to open a tab with ~/.vimrc for fast editing of the .vimrc.
 nnoremap <leader>v :tabe! $MYVIMRC<CR>
 
@@ -113,12 +121,12 @@ endfunction
 vnoremap <silent> <expr> p PasteOver()
 
 " Center the screen when jumping to successive search results.
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+" nnoremap n nzz
+" nnoremap N Nzz
+" nnoremap * *zz
+" nnoremap # #zz
+" nnoremap g* g*zz
+" nnoremap g# g#zz
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: godlygeek/tabular

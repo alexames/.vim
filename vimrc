@@ -144,8 +144,8 @@ autocmd! bufwritepost $HOME/.vim/keybinds.vim source $MYVIMRC
 autocmd! bufwritepost $VIM/vimfiles/vimrc source $MYVIMRC
 
 " Files that can not be written should not be modifiable.
-autocmd! BufNew,BufAdd,BufWrite,BufNewFile,BufRead,BufEnter,FilechangedRO * : if &ro | set nomodifiable | endif
-autocmd! BufNew,BufAdd,BufWrite,BufNewFile,BufRead,BufEnter,FilechangedRO * : if !&ro | set modifiable | endif
+autocmd! BufNew,BufAdd,BufWrite,BufNewFile,BufRead,BufEnter,FilechangedRO * : if &buftype !=# 'terminal' && &ro | set nomodifiable | endif
+autocmd! BufNew,BufAdd,BufWrite,BufNewFile,BufRead,BufEnter,FilechangedRO * : if &buftype !=# 'terminal' && !&ro | set modifiable | endif
 
 " Format on save
 augroup autoformat_settings
