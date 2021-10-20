@@ -41,9 +41,11 @@ Plug 'tpope/vim-fugitive'                 " Git integration.
 Plug 'airblade/vim-gitgutter'             " Git in-file line changes.
 Plug 'ilyachur/cmake4vim'                 " CMake integration.
 Plug 'google/vim-codefmt'                 " clang-format integration.
+if has('python3')
 Plug 'puremourning/vimspector'            " GDB integration.
 Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clangd-completer' }
                                           " Language-semantic-aware autocompletion and other features.
+endif
 
 " Filesystem navigation.
 Plug 'scrooloose/nerdtree'                " A file system explorer for the Vim editor.
@@ -77,7 +79,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set background=dark        " Use the dark colorscheme instead of the light one.
-colorscheme onedark
+silent! colorscheme onedark
 let g:airline_theme='onedark'
 
 set title                  " Sets the titlebar of the terminal to be the name of the file.
