@@ -1,5 +1,5 @@
 " This is the vimrc file for use across all computers I use.
-" Changes specific to a specific computer should go in ~/.vimrc.
+" Changes specific to a specific computer should go in $HOME/.vimrc.
 
 set nocompatible
 
@@ -10,14 +10,15 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""
 " vim-plug automatic installation
 " https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '$HOME/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  finish
 endif
 
 " Plugins will be downloaded under the specified directory.
-call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '$HOME/.vim/plugged')
 
 " Basic stuff.
 Plug 'tpope/vim-sensible'                 " Sensible default settings.
@@ -165,7 +166,7 @@ augroup END
 "                                   Keybinds                                   "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-source ~/.vim/keybinds.vim
+source $HOME/.vim/keybinds.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                               Plugins Options                                "
