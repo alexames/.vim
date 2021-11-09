@@ -106,18 +106,18 @@ set grepprg=grep\ -rnH\ $* " sets GNU grep to be the program to run when searchi
 set mouse=""               " what the mouse pointer looks like in different modes.
 set guioptions=rLte        " Remove menu bar when using a GUI (gvim).
 set list                   " Visible whitespace, displayed using listchars below.
-set listchars=tab:\ \ ┊,
-             \space:·,
-             \trail:•,
-             \extends:…,
-             \precedes:…,
-             \nbsp:.,
-             \eol:$,
+" set listchars=tab:\ \ ┊,
+"              \space:·,
+"              \trail:•,
+"              \extends:…,
+"              \precedes:…,
+"              \nbsp:.,
+"              \eol:$,
 set colorcolumn=81         " Put a line at 80 characters.
                            " But java and Objective-C should be set to 101.
-set fillchars=vert:┃,
-             \fold:━,
-             \diff:~,
+" set fillchars=vert:┃,
+"              \fold:━,
+"              \diff:~,
 autocmd Filetype java setlocal colorcolumn=101
 autocmd Filetype objc,objcpp setlocal colorcolumn=101
 
