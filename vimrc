@@ -83,6 +83,7 @@ Plug 'Yggdroot/indentLine'                " Allow indentation lines for spaces.
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
+Plug 'svban/YankAssassin.vim'             " Yank doesn't move cursor
 
 call plug#end()
 

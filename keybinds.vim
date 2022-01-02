@@ -66,8 +66,7 @@ tnoremap <C-j> <C-w>j
 tnoremap <C-k> <C-w>k
 tnoremap <C-l> <C-w>l
 
-tnoremap : <C-W>:
-tnoremap :: :
+tnoremap :: <C-W>:
 
 " Use \v to open a tab with ~/.vimrc for fast editing of the .vimrc.
 nnoremap <leader>v :tabe! $MYVIMRC<CR>
