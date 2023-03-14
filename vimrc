@@ -49,15 +49,20 @@ Plug 'kana/vim-textobj-user'              " Helps define custom text objects. Ne
 Plug 'tpope/vim-dispatch'                 " Async utilities, mostly useful for other plugins.
 
 " IDE Feature integrations.
+"" Git
 Plug 'tpope/vim-fugitive'                 " Git integration.
 Plug 'airblade/vim-gitgutter'             " Git in-file line changes.
-Plug 'ilyachur/cmake4vim'                 " CMake integration.
+"" Language Agnostic
 Plug 'google/vim-codefmt'                 " clang-format integration.
 if has('python3')
-Plug 'puremourning/vimspector'            " GDB integration.
 Plug 'ycm-core/YouCompleteMe', { 'do' : './install.py --clangd-completer' }
                                           " Language-semantic-aware autocompletion and other features.
 endif
+"" C++ Plugins
+Plug 'puremourning/vimspector'            " GDB integration.
+Plug 'ilyachur/cmake4vim'                 " CMake integration.
+"" Python plugins
+Plug 'alfredodeza/pytest.vim'
 
 " Filesystem navigation.
 Plug 'scrooloose/nerdtree'                " A file system explorer for the Vim editor.
@@ -79,7 +84,6 @@ Plug 'junegunn/fzf.vim'                   " Fuzzy Finder functionality for buffe
 Plug 'junegunn/vim-peekaboo'              " When using registers, pop open a window to display them
 Plug 'junegunn/rainbow_parentheses.vim'   " Make parens multicolored and matching
 Plug 'sheerun/vim-polyglot'               " Language packs for syntax highlighting.
-Plug 'Yggdroot/indentLine'                " Allow indentation lines for spaces.
 
 " Additional utilities.
 Plug 'godlygeek/tabular'                  " Table alignment plugin.
@@ -118,18 +122,18 @@ set grepprg=grep\ -rnH\ $* " sets GNU grep to be the program to run when searchi
 set mouse=""               " what the mouse pointer looks like in different modes.
 set guioptions=rLte        " Remove menu bar when using a GUI (gvim).
 set list                   " Visible whitespace, displayed using listchars below.
-" set listchars=tab:\ \ ┊,
-"              \space:·,
-"              \trail:•,
-"              \extends:…,
-"              \precedes:…,
-"              \nbsp:.,
-"              \eol:$,
+set listchars=tab:\\>,
+             \space:·,
+             \trail:•,
+             \extends:…,
+             \precedes:…,
+             \nbsp:.,
+             \eol:$,
 set colorcolumn=81         " Put a line at 80 characters.
                            " But java and Objective-C should be set to 101.
-" set fillchars=vert:┃,
-"              \fold:━,
-"              \diff:~,
+set fillchars=vert:┃,
+             \fold:━,
+             \diff:~,
 autocmd Filetype java setlocal colorcolumn=101
 autocmd Filetype objc,objcpp setlocal colorcolumn=101
 
@@ -171,6 +175,7 @@ augroup autoformat_settings
   autocmd FileType gn AutoFormatBuffer gn
   autocmd FileType html,css,json AutoFormatBuffer js-beautify
   autocmd FileType java AutoFormatBuffer google-java-format
+  " Enable once we get all files formatted
   " autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
@@ -185,21 +190,26 @@ source $HOME/.vim/keybinds.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin 'ilyachur/cmake4vim'
+" ftplugin/python.vim
+
+let g:python_recommended_style = 0
+
+""""""""""""""""""""""""""""""""""""""""
+" 'ilyachur/cmake4vim'
 
 let g:cmake_compile_commands=1
 let g:cmake_compile_commands_link=1
 let g:cmake_vimspector_support=1
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin 'scrooloose/nerdtree'
+" 'scrooloose/nerdtree'
 
 let NERDTreeMinimalUI=1
 let NERDTreeShowHidden=1
 let NERDTreeWinSize=48
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin 'vim-scripts/a.vim'
+" 'vim-scripts/a.vim'
 
 let g:alternateExtensions_h = "cc,cpp,cxx,c,mm,m"
 let g:alternateExtensions_mm = "h"
@@ -214,5 +224,13 @@ augroup rainbow_parens
 augroup END
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+""""""""""""""""""""""""""""""""""""""""
+" 'ycm-core/YouCompleteMe'
 
-let g:indentLine_char = '│'
+let g:ycm_python_interpreter_path = ''
+let g:ycm_python_sys_path = []
+let g:ycm_extra_conf_vim_data = [
+  \  'g:ycm_python_interpreter_path',
+  \  'g:ycm_python_sys_path'
+  \]
+let g:ycm_global_ycm_extra_conf = '~/.vim/global_extra_conf.py'

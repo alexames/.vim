@@ -104,7 +104,6 @@ cmap <C-V> <C-R>+
 " Display matches of last search in window
 nnoremap <silent> <leader>g :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
-" nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
 nnoremap <silent> <leader><space> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " Replace selected text with text in paste register, without overwriting the
@@ -174,3 +173,8 @@ nmap <C-y> <Plug>(YCMFindSymbolInWorkspace)
 
 nnoremap <leader>r :YcmCompleter RefactorRename
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin 'google/vim-codefmt'
+
+nnoremap <silent> <leader>= :call Preserve("FormatCode")<CR>
+vnoremap <silent> <leader>= :call Preserve("FormatLines")<CR>
