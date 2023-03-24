@@ -118,6 +118,10 @@ function! PasteOver()
 endfunction
 vnoremap <silent> <expr> p PasteOver()
 
+" Toggle visible whitespace (useful when you want to copy a line without
+" picking up the various dots and symbols)
+nnoremap <leader>w :set list!<cr>
+
 " Center the screen when jumping to successive search results.
 " nnoremap n nzz
 " nnoremap N Nzz

@@ -121,7 +121,7 @@ set grepprg=grep\ -rnH\ $* " sets GNU grep to be the program to run when searchi
                            "   -H: show filenames
 set mouse=""               " what the mouse pointer looks like in different modes.
 set guioptions=rLte        " Remove menu bar when using a GUI (gvim).
-set list                   " Visible whitespace, displayed using listchars below.
+set nolist                 " No visible whitespace by default (keybind activates it elsewhere)
 set listchars=tab:\\>,
              \space:·,
              \trail:•,
